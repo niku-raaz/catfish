@@ -1,23 +1,24 @@
 #include "board.h"
 #include "movegen.h"
+#include "search.h"
 #include <vector>
 #include <iostream>
 
 int main() {
+
     initKnightAttacks();
+    initKingAttacks();
 
     Position pos;
     setStartPosition(pos);
 
-    std::vector<Move> moves;
-    //generatePawnMoves(pos, moves);
-    generateKnightMoves(pos, WHITE,moves);
-    generateKnightMoves(pos, BLACK,moves);
-    printBoard(pos);
-
-    std::cout<<"Total Knight move "<< moves.size()<<" ";
+    
 
     
+    for(int i = 1; i <= 5; i++) {
+        uint64_t nodes = perft(pos, i);
+        std::cout << "Perft(" << i << "): " << nodes << std::endl;
+    }
 
     return 0;
 }
