@@ -11,6 +11,7 @@
                 "${workspaceFolder}/engine/engine.exe",
                 "${workspaceFolder}/engine/board.cpp",
                 "${workspaceFolder}/engine/movegen.cpp",
+                "${workspaceFolder}/engine/eval.cpp",
                 "${workspaceFolder}/engine/search.cpp",
                 "${workspaceFolder}/engine/main.cpp"
             ],
