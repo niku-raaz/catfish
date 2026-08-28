@@ -21,7 +21,9 @@ Testing/
 
 # Editor files
 .idea/
-.vscode/
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
 *.swp
 *.swo
 
@@ -39,3 +41,8 @@ dist-server/
 coverage/
 playwright-report/
 test-results/
+
+
+#AI agents
+codex/
+claude/

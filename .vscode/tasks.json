@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Catfish: Configure engine (MinGW debug)",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--preset", "mingw-debug"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Catfish: Compile engine (MinGW debug)",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "--preset", "mingw-debug"],
+      "dependsOn": "Catfish: Configure engine (MinGW debug)",
+      "dependsOrder": "sequence",
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "Catfish: Run full app",
+      "type": "npm",
+      "script": "dev",
+      "dependsOn": "Catfish: Compile engine (MinGW debug)",
+      "dependsOrder": "sequence",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "catfish",
+        "pattern": [{ "regexp": ".*" }],
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "VITE v",
+          "endsPattern": "Local:"
+        }
+      }
+    },
+    {
+      "label": "Catfish: Test engine",
+      "type": "shell",
+      "command": "ctest",
+      "args": ["--preset", "mingw-debug"],
+      "dependsOn": "Catfish: Compile engine (MinGW debug)",
+      "dependsOrder": "sequence",
+      "problemMatcher": []
+    }
+  ]
+}
