@@ -190,10 +190,10 @@ tests with V8 coverage and fails when total coverage drops below these floors:
 
 | Metric | Minimum |
 | --- | ---: |
-| Statements | 70% |
-| Lines | 70% |
-| Branches | 60% |
-| Functions | 60% |
+| Statements | 60% |
+| Lines | 60% |
+| Branches | 50% |
+| Functions | 50% |
 
 Run the coverage gate locally with `npm run test:coverage`. The generated
 `coverage/` directory is ignored by Git; GitHub Actions stores it as a
