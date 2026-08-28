@@ -1,0 +1,21 @@
+services:
+  - type: web
+    runtime: docker
+    name: catfish-chess-engine
+    region: singapore
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CATFISH_ENGINE_PATH
+        value: /app/bin/catfish_uci
+      - key: CATFISH_HASH_MB
+        value: 32
+      - key: CATFISH_MAX_PENDING_SEARCHES
+        value: 8
+      - key: CATFISH_RATE_LIMIT_MAX
+        value: 60

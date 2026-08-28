@@ -1,0 +1,19 @@
+services:
+  catfish:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+      PORT: 8787
+      CATFISH_ENGINE_PATH: /app/bin/catfish_uci
+      CATFISH_HASH_MB: 32
+      CATFISH_MAX_PENDING_SEARCHES: 8
+      CATFISH_RATE_LIMIT_MAX: 60
+    ports:
+      - "8787:8787"
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true

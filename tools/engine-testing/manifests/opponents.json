@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "suite": "stockfish-smoke",
+  "notes": [
+    "Fill binary paths and hashes after pinning local/CI artifacts.",
+    "Never use an unpinned 'latest' download for recorded results.",
+    "Depth-equal matches are functional tests, not Elo comparisons."
+  ],
+  "catfish": {
+    "name": "Catfish",
+    "version": "0.2.0",
+    "source_url": "https://github.com/local/catfish",
+    "release_tag": "unreleased",
+    "binary_path": "../../build/release/catfish_uci",
+    "binary_sha256": "REPLACE_AFTER_BUILD",
+    "compiler": "REPLACE_ME",
+    "build_flags": "CMAKE_BUILD_TYPE=Release",
+    "cpu_architecture": "REPLACE_ME",
+    "nnue_network_hash": null,
+    "uci_options": {
+      "Hash": 32,
+      "OwnBook": false,
+      "Threads": null
+    }
+  },
+  "opponents": [
+    {
+      "name": "Stockfish",
+      "version": "REPLACE_ME",
+      "source_url": "https://github.com/official-stockfish/Stockfish",
+      "release_tag": "REPLACE_ME",
+      "binary_path": "REPLACE_WITH_ABSOLUTE_PATH",
+      "binary_sha256": "REPLACE_ME",
+      "compiler": "REPLACE_ME",
+      "build_flags": "REPLACE_ME",
+      "cpu_architecture": "REPLACE_ME",
+      "nnue_network_hash": "REPLACE_ME",
+      "uci_options": {
+        "Hash": 32,
+        "Threads": 1,
+        "Ponder": false
+      },
+      "license": "GPLv3 — binary obtained separately; not redistributed with Catfish"
+    }
+  ],
+  "openings": {
+    "file": "REPLACE_WITH_ABSOLUTE_PATH_TO_2moves_v1.epd",
+    "format": "epd",
+    "source_url": "https://github.com/official-stockfish/books",
+    "checksum_sha256": "REPLACE_ME",
+    "order": "random",
+    "seed": 1
+  },
+  "tournament": {
+    "runner": "fastchess",
+    "concurrency": 1,
+    "rounds": 20,
+    "repeat": true,
+    "each": {
+      "depth": 4,
+      "Hash": 32
+    },
+    "command_template": "fastchess -engine cmd={catfish} name=Catfish option.OwnBook=false -engine cmd={stockfish} name=Stockfish option.Threads=1 -each depth=4 option.Hash=32 -openings file={openings} format=epd order=random -rounds 20 -repeat -concurrency 1 -pgnout file=results/stockfish-smoke.pgn notation=san",
+    "pgn_out": "results/stockfish-smoke.pgn"
+  }
+}

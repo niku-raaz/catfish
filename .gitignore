@@ -1,0 +1,40 @@
+.DS_Store
+
+# Build outputs
+build/
+cmake-build-*/
+out/
+bin/
+lib/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+CTestTestfile.cmake
+Testing/
+
+# Local environment
+.env
+*.local
+
+# Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Engine tournament outputs
+tools/engine-testing/results/*
+!tools/engine-testing/results/.gitkeep
+
+# JavaScript
+node_modules/
+dist-web/
+dist-server/
+playwright-report/
+test-results/
