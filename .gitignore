@@ -38,6 +38,7 @@ tools/engine-testing/results/*
 node_modules/
 dist-web/
 dist-server/
+coverage/
 playwright-report/
 test-results/
 
