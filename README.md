@@ -181,6 +181,25 @@ viewports. Install its Chromium runtime once with:
 npx playwright install chromium
 ```
 
+## Continuous integration and coverage
+
+Every pull request runs the `verify` GitHub Actions check, which validates the
+web/server code, C++ engine, UCI process, browser workflow, and production
+container build. The separate `Test coverage` check runs the TypeScript unit
+tests with V8 coverage and fails when total coverage drops below these floors:
+
+| Metric | Minimum |
+| --- | ---: |
+| Statements | 60% |
+| Lines | 60% |
+| Branches | 50% |
+| Functions | 50% |
+
+Run the coverage gate locally with `npm run test:coverage`. The generated
+`coverage/` directory is ignored by Git; GitHub Actions stores it as a
+downloadable artifact for 14 days. To block merges, protect `main` with pull
+requests and make both `verify` and `Test coverage` required status checks.
+
 ## Configuration
 
 Copy `.env.example` to `.env` for local overrides:
