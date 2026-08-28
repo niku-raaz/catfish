@@ -1,0 +1,37 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Catfish: Run full app",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run dev",
+      "preLaunchTask": "Catfish: Compile engine (MinGW debug)"
+    },
+    {
+      "name": "Catfish: Debug server",
+      "type": "pwa-node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["tsx", "--inspect-brk", "server/index.ts"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "autoAttachChildProcesses": true,
+      "skipFiles": ["<node_internals>/**"],
+      "preLaunchTask": "Catfish: Compile engine (MinGW debug)"
+    },
+    {
+      "name": "Catfish: Debug engine CLI",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/debug/catfish.exe",
+      "args": ["board"],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "C:/msys64/ucrt64/bin/gdb.exe",
+      "externalConsole": false,
+      "preLaunchTask": "Catfish: Compile engine (MinGW debug)"
+    }
+  ]
+}
