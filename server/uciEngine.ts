@@ -20,6 +20,12 @@ type EngineOptions = {
 
 const UCI_MOVE_PATTERN = /^[a-h][1-8][a-h][1-8][qrbn]?$/;
 
+export function engineExecutableName(
+  platform: NodeJS.Platform = process.platform,
+): string {
+  return platform === "win32" ? "catfish_uci.exe" : "catfish_uci";
+}
+
 function boundedInteger(
   value: string | undefined,
   fallback: number,
@@ -97,11 +103,12 @@ export function parseInfoLine(line: string): EngineInfo | null {
 
 async function findEnginePath(): Promise<string> {
   const configured = process.env.CATFISH_ENGINE_PATH;
+  const executable = engineExecutableName();
   const candidates = [
     configured,
-    path.resolve("build/release/catfish_uci"),
-    path.resolve("build/debug/catfish_uci"),
-    path.resolve("build/make/catfish_uci"),
+    path.resolve("build/debug", executable),
+    path.resolve("build/release", executable),
+    path.resolve("build/make", executable),
   ].filter((candidate): candidate is string => Boolean(candidate));
 
   for (const candidate of candidates) {

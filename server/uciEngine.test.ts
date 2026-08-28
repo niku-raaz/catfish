@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { fileURLToPath } from "node:url";
 import { searchRequestSchema } from "./contracts.js";
 import {
+  engineExecutableName,
   LineBuffer,
   parseInfoLine,
   UciEngine,
@@ -19,6 +20,11 @@ afterEach(async () => {
 });
 
 describe("UCI stream parsing", () => {
+  it("uses the platform-specific engine executable name", () => {
+    expect(engineExecutableName("win32")).toBe("catfish_uci.exe");
+    expect(engineExecutableName("linux")).toBe("catfish_uci");
+  });
+
   it("preserves partial lines and emits complete lines", () => {
     const buffer = new LineBuffer();
     expect(buffer.push("ready")).toEqual([]);
